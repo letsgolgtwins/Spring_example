@@ -31,4 +31,7 @@ public interface ReviewMapper {
 			@Param("id") int id, 
 			@Param("review") String review
 			);
+	
+	// lesson03 ex04 delete
+	public int deleteReviewById(int id);
 }

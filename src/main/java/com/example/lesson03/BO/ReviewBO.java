@@ -37,4 +37,10 @@ public class ReviewBO {
 	public int updateReviewById(int id, String review) {
 		return reviewMapper.updateReviewById(id, review);
 	}
+	
+	// lesson03 ex04 delete
+	// 이번엔 아웃풋을 int로 말고 다르게 해주겟다. (아웃풋이 없는 void로 안넘기겠다.)
+	public void deleteReviewById(int id) {
+		int rowCount = reviewMapper.deleteReviewById(id);
+	}
 }
