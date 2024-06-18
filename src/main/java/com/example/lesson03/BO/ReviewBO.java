@@ -27,7 +27,7 @@ public class ReviewBO {
 	}
 	
 	// lesson03 ex02_2 insert 
-//	addReviewAsField(4, "콤비네이션R", "꾸꾸", 5.0, "역시 맛있다 도미노!");를 보고 만들것
+	// addReviewAsField(4, "콤비네이션R", "꾸꾸", 5.0, "역시 맛있다 도미노!"); 를 보고 만들것
 	public int addReviewAsField(int storeId, String menu, String userName, Double point, String review) {
 		return reviewMapper.insertReviewAsField(storeId, menu, userName, point, review);
 	}
