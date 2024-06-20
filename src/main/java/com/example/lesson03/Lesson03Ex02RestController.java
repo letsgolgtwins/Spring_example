@@ -35,13 +35,7 @@ public class Lesson03Ex02RestController {
 	// http://localhost/lesson03/ex02/02
 	@RequestMapping("/02")
 	public String quiz02_2() { // 하나하나씩 들어가는 경우
-//		storeId
-//		menu
-//		userName
-//		point
-//		review
-//		createdAt
-//		updatedAt
+
 		int rowCount = reviewBO.addReviewAsField(4, "콤비네이션R", "꾸꾸", 5.0, "역시 맛있다 도미노!");
 		return "성공한 행의 개수: " + rowCount;
 	}

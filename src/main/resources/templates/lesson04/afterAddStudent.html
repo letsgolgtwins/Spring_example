@@ -10,7 +10,39 @@
 <body>
 	<div class="container">
 		<h1>방금 가입된 학생 정보</h1>
+		<table class="table">
+			<tr>
+				<th>번호</th>
+				<td th:text="${student.id}">임시번호</td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td th:text="${student.name}">임시 이름</td>
+			</tr>
+			<tr>
+				<th>휴대폰 번호</th>
+				<td th:text="${student.phoneNumber}">임시 번호</td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td th:text="${student.email}">임시 이메일</td>
+			</tr>
+			<tr>
+				<th>생성일</th>
+				<td th:text="${student.createdAt}">20240620</td>
+			</tr>
+			<tr>
+				<th>수정일</th>
+				<td th:text="${student.createdAt}">20240620</td>
+			</tr>
+		
+		</table>
+		<br>
+		<h1>방금 가입된 학생 정보</h1>
+		<h4 class="font-weight-bold" th:text="${student.name}">아무개</h4>
+		<h4 th:text="${student.phoneNumber}">대체제</h4>
+		<h4 th:text="${student.email}">대체제</h4>
+		<h4 class="font-weight-bold" th:text="${student.dreamJob}"></h4>
 	</div>
-
 </body>
 </html>
