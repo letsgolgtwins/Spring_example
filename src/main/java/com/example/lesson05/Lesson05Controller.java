@@ -1,6 +1,10 @@
 package com.example.lesson05;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,5 +57,28 @@ public class Lesson05Controller {
 		return "lesson05/ex02";
 	}
 	
+	// http://localhost/lesson05/ex03
+	@GetMapping("/ex03")
+	public String ex03(Model model) {
+		// Mon Jun 24 16:20:24 KST 2024
+		Date date = new Date();
+		model.addAttribute("date", date); // 모델에 담기
+		
+		// 2024-06-24
+		LocalDate localDate = LocalDate.now(); // new를 안했음에도 now()를 사용할 수 있는 이유는 static메소드여서 그럼
+		model.addAttribute("localDate", localDate); // 모델에 담기
+		
+		// 2024-06-24T16:21:23.415145900
+		LocalDateTime localDateTime = LocalDateTime.now(); // static메소드
+		model.addAttribute("localDateTime", localDateTime); // 모델에 담기
+		
+		// UTC 표준시 - 글로벌하게 사용하는 경우
+		// 2024-06-24T16:22:00.409707800+09:00[Asia/Seoul]
+		ZonedDateTime zonedDateTime = ZonedDateTime.now(); // static 메소드
+		model.addAttribute("zonedDateTime", zonedDateTime); // 모델에 담기
+		
+		// 화면
+		return "lesson05/ex03";
+	}
 	
 }
