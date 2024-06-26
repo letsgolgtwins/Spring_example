@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>회원가입 화면</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- src="https://code.jquery.com/jquery-3.7.1.js" 부분이 slim이면 안된다 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>회원가입1</h1>
+		<form action="/lesson06/ex01/add-user" method="post">
+			<div class="form-group">
+				<label for="name">이름</label> <input type="text" id="name"
+					name="name" class="form-control col-4">
+			</div>
+			<div class="form-group">
+				<label for="yyyymmdd">생년월일</label> <input type="text" id="yyyymmdd"
+					name="yyyymmdd" class="form-control col-4"
+					placeholder="예) 19991201">
+			</div>
+			<div class="form-group">
+				<label for="email">이메일</label> <input type="text" id="email"
+					name="email" class="form-control col-4">
+			</div>
+			<div class="form-group">
+				<label for="introduce">자기소개</label>
+				<textarea id="introduce" name="introduce" class="form-control"></textarea>
+			</div>
+			<!-- form을 깨야한다. -> 3종 세트중 제일 깨기 쉬운 submit을 button으로 바꾸기 -->
+			<input type="button" value="회원가입" id="joinBtn" class="btn btn-success">
+		</form>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			/*
+			// 1) JQuery를 통한 form submit (예전에 했던 거 복습)			
+			$("form").on('submit', function(e) { // submit이 일어나면 실행하겠다~ + 멈추는 방법: function(에 객체 e) 해주고 아래에다 e.preventDefault(); 
+				e.preventDefault(); // 서브밋 기능 중단(화면 이동 X) // 이러면 이제 alert창의 확인을 눌러도 다음 페이지로 넘어가지 않고 그대로 회원가입 페이지에 머문다.
+
+				// name validation (이번엔 id말고 name으로)
+				let name = $("input[name=name]").val().trim(); // trim()은 앞 뒤 여백 제거 함수
+				if (name.length < 1) {
+					alert("이름을 입력하세요.");
+					return false; // submit 이벤트 할때는 return false를 해줘야지 먹힌다.
+				}
+
+				// yyyymmdd validation (이번엔 id으로)
+				let yyyymmdd = $("#yyyymmdd").val().trim();
+				if (yyyymmdd == "") {
+					alert("생년월일을 입력하세요.");
+					return false; // submit 이벤트 할때는 return false를 해줘야지 먹힌다.
+				}
+
+				// email validation (이번에도 id로)
+				let email = $("#email").val().trim();
+				if (!email) { // email이 없을 때 email = "" 대체
+					alert("이메일 주소를 입력하세요.");
+					return false; // submit 이벤트 할때는 return false를 해줘야지 먹힌다.
+				}
+
+				alert("서브밋");
+			}); // alert이 끝나고 나면 화면이 이동함
+			*/
+			
+			// 2) JQuery에 AJAX 통신 이용
+			$("#joinBtn").on('click', function() {
+				// alert("클릭");
+				
+				// name validation (이번엔 id말고 name으로)
+				let name = $("input[name=name]").val().trim(); // trim()은 앞 뒤 여백 제거 함수
+				if (name.length < 1) {
+					alert("이름을 입력하세요.");
+					return; 
+				}
+
+				// yyyymmdd validation (이번엔 id으로)
+				let yyyymmdd = $("#yyyymmdd").val().trim();
+				if (yyyymmdd == "") {
+					alert("생년월일을 입력하세요.");
+					return; 
+				}
+
+				// email validation (이번에도 id로)
+				let email = $("#email").val().trim();
+				if (!email) { // email이 없을 때 email = "" 대체
+					alert("이메일 주소를 입력하세요.");
+					return;
+				}
+				
+				// 이제는 form이 아니므로 null허용인 introduce validation도 가져와야 한다.(이번에도 id로)
+				let introduce = $("#introduce").val();
+				
+				// 이쯤에서 중간점검 함 하자 -> 새로고침 한다음 이름, 생일, 이메일, 소개 입력하고 회원가입 버튼 누르고 > 검사창 콘솔 확인
+				console.log(name);
+				console.log(yyyymmdd);
+				console.log(email);
+				console.log(introduce);
+				
+				// 자! 중간점검 마쳤으니 이제 AJAX 통신으로 서버에 요청하자 $.ajax({})
+				$.ajax({
+					// request
+					type:"POST"
+					, url:"/lesson06/ex01/add-user"
+					, data:{"name":name, "yyyymmdd":yyyymmdd, "email":email, "introduce":introduce} // "request parameter명":변수
+					
+					// response
+					// callback 함수(다시 돌아온다는 의미)
+					, success:function(data) { // 이 data는 응답값(String)을 의미하는데, 위의 data(109번)와 전혀 연관없다.
+						// alert(data);
+						// 성공을 했을 때 뭘 보여줄 건가..
+						if (data == "성공!") {
+							location.href = "/lesson06/ex01/after-add-user-view";
+						}
+					}
+					, error:function(xhr, status, error) {
+						alert(xhr);	
+						alert(status);	
+						alert(error);	
+					}
+				});
+			});
+		}); // ready 함수 끝.
+	</script>
+</body>
+</html>
