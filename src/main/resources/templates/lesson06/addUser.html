@@ -105,7 +105,7 @@
 				$.ajax({
 					// request
 					type:"POST"
-					, url:"/lesson06/ex01/add-user"
+					, url:"/lesson06/ex01/add-user" // PostMapping 주소 
 					, data:{"name":name, "yyyymmdd":yyyymmdd, "email":email, "introduce":introduce} // "request parameter명":변수
 					
 					// response
@@ -114,7 +114,7 @@
 						// alert(data);
 						// 성공을 했을 때 뭘 보여줄 건가..
 						if (data == "성공!") {
-							location.href = "/lesson06/ex01/after-add-user-view";
+							location.href = "/lesson06/ex01/after-add-user-view"; // 최종 목적지 화면
 						}
 					}
 					, error:function(xhr, status, error) {
@@ -122,8 +122,8 @@
 						alert(status);	
 						alert(error);	
 					}
-				});
-			});
+				}); // ajax 끝.
+			}); // joinBtn 클릭 이벤트 끝.
 		}); // ready 함수 끝.
 	</script>
 </body>
