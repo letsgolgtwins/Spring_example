@@ -24,4 +24,10 @@ public class UserBO {
 	public User getLatestUser() {
 		return userMapper.selectLatestUser();
 	}
+	
+	// lesson06 ex02 AJAX DB에서 select
+	// input: name & output: boolean 
+	public boolean isDuplicationByName(String name) { // name필드를 가지고 중복인지 여부를 true, false로 return 함
+		return userMapper.isDuplicationByName(name);
+	}
 }

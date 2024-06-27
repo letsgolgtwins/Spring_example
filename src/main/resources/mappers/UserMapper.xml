@@ -40,4 +40,15 @@
 		ORDER BY `id` DESC 
 		LIMIT 1
  	</select>
+ 	
+ 	<!-- lesson06 ex02 AJAX DB에서 select -->
+ 	<!-- 0이 아닌 수(중복이 있는 셈): true / 0(중복이 없는 셈): false -->
+ 	<select id="isDuplicationByName" parameterType="String" resultType="boolean">
+ 		SELECT 
+ 			COUNT(*)
+ 		FROM 
+ 			`new_user`
+ 		WHERE
+ 			`name` = #{name}
+ 	</select>
  </mapper>

@@ -18,4 +18,7 @@ public interface UserMapper {
 	
 	// lesson04 ex01_1
 	public User selectLatestUser();
+	
+	// lesson06 ex02 AJAX DB에서 select
+	public boolean isDuplicationByName(String name); // 특수한 쿼리
 }
