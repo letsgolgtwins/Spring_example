@@ -2,6 +2,9 @@ package com.example.lesson04.domain;
 
 import java.time.LocalDateTime;
 
+import lombok.Data;
+
+@Data
 public class User {
 
 	// 필드
@@ -13,62 +16,5 @@ public class User {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
-	// getter
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getYyyymmdd() {
-		return yyyymmdd;
-	}
-
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	// setter
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setYyyymmdd(String yyyymmdd) {
-		this.yyyymmdd = yyyymmdd;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
+	// 240702 loombok 테스트로 getter setter 다 지웠음.
 }
