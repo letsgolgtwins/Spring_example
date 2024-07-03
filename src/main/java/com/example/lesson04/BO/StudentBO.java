@@ -1,6 +1,7 @@
 package com.example.lesson04.BO;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,41 @@ public class StudentBO {
 		return studentRespository.save(student);
 		
 	}
+	
+	// 240703 JPA - update 
+	// i: id, dreamJob / o: StudentEntity or null
+	public StudentEntity updateStudentDreamJobById(int id, String dreamJob) {
+		// 기존 데이터 조회 => StudentEntity
+		StudentEntity student = studentRespository.findById(id).orElse(null); // 객체가 비어있을 경우엔 null로, 있을 경우엔 studentEntity로 
+		
+		// Entity의 데이터값을 변경해놓는다.
+		if (student != null) { // student가 null이 아닐때
+			student = student.toBuilder() // toBuilder는 기존 필드값은 유지
+					.dreamJob(dreamJob) // 바꾸고 싶은 필드명(들어온 파라미터이름)
+					.build(); // build()로 뚜껑 닫기 & 꼭 위에서 객체에 다시 저장!
+			
+			// update
+			// save 요청
+			student = studentRespository.save(student);
+		}
+		return student;
+	}
+
+	// 240703 JPA - delete
+	// i: id / o: void
+	public void deleteStudentById(int id) {
+		// 방법1. 
+//		StudentEntity student =	studentRespository.findById(id).orElse(null);
+//		if (student != null) {
+//			studentRespository.delete(student);
+//		} 
+		
+		// 방법2.
+		Optional<StudentEntity> studentOptional = studentRespository.findById(id);
+		studentOptional.ifPresent(s -> studentRespository.delete(s)); // new문법) 람다식. 이럴경우 if문을 쓰지 않고도 NPE발생이 없다.
+	}
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
 	// input: Student(파라미터 하나하나가 아닌 Student 자체) & output: void or int
 	public void addStudent(Student student) {
